@@ -1,101 +1,45 @@
 <script>
-    
     import Globe from '$lib/assets/globe.svg';
-</script>
-<div class="strip">
-    <div class="strip1">
-        <!-- svelte-ignore a11y-missing-attribute -->
-        <div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-        <div class="banner">&nbsp;PETRICHOR</div>
-    </div>
-    <div class="strip1">
-        <!-- svelte-ignore a11y-missing-attribute -->
-        <div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-        <div class="banner">&nbsp;PETRICHOR</div>
-    </div>
-    <div class="strip1">
-        <!-- svelte-ignore a11y-missing-attribute -->
-        <div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-        <div class="banner">&nbsp;PETRICHOR</div>
-    </div>
-    <div class="strip1">
-        <!-- svelte-ignore a11y-missing-attribute -->
-        <div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-        <div class="banner">&nbsp;PETRICHOR</div>
-    </div>
-    <div class="strip1">
-        <!-- svelte-ignore a11y-missing-attribute -->
-        <div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-        <div class="banner">&nbsp;PETRICHOR</div>
-    </div>
-    <div class="strip1">
-        <!-- svelte-ignore a11y-missing-attribute -->
-        <div class="banner"><img src={Globe} style="filter: invert();width: 20px;" /></div>
-        <div class="banner">&nbsp;PETRICHOR</div>
-    </div>
 
+    const stripItems = Array(8).fill('PETRICHOR');
+</script>
+
+<div class="flex items-center overflow-hidden w-screen h-10 my-4 bg-white/[0.02] backdrop-blur-[10px] border-t border-b border-white/[0.08] opacity-70">
+    {#each stripItems as item, index}
+        <div class="flex justify-center items-center gap-3 min-w-[max(20%,150px)] flex-shrink-0 strip1">
+            <div class="inline-flex items-center">
+                <img src={Globe} alt="Globe" class="w-4 h-4 invert opacity-60" />
+            </div>
+            <div class="inline-flex items-center">
+                <span class="text-white font-medium text-sm tracking-[1.5px] opacity-80 whitespace-nowrap">&nbsp;{item}</span>
+            </div>
+        </div>
+    {/each}
 </div>
 
 <style>
+    .strip1 {
+        animation: infinite-scroll 5s linear infinite;
+    }
+
+    @keyframes infinite-scroll {
+        0% {
+            transform: translateX(0%);
+        }
+        100% {
+            transform: translateX(-100%);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .strip1 {
+            animation: infinite-scroll 4s linear infinite;
+        }
+    }
     
-    .strip {
-		display: flex;
-		flex: 2;
-		align-items: center;
-		overflow-x: hidden;
-		width: 100vw;
-		max-height: 35px;
-        margin-bottom: 5vh;
-		margin: 2rem 0;
-		border-top: 2px solid white;
-		border-bottom: 2px solid white;
-		padding-top: 12px;
-		padding-bottom: 12px;
-		opacity: 60%;
-	}
-	.strip1 {
-		display: flex;
-		justify-content: center;
-		min-width: max(20%, 150px);
-
-		/* Apply animation to this element */
-		-moz-animation: example1 5s linear infinite;
-		-webkit-animation: example1 5s linear infinite;
-		animation: example1 5s linear infinite;
-	}
-
-	.banner {
-		display: inline-block;
-	}
-
-    /* Move it (define the animation) */
-	@-moz-keyframes example1 {
-		0% {
-			-moz-transform: translateX(0%);
-		}
-		100% {
-			-moz-transform: translateX(-100%);
-		}
-	}
-	@-webkit-keyframes example1 {
-		0% {
-			-webkit-transform: translateX(0%);
-		}
-		100% {
-			-webkit-transform: translateX(-100%);
-		}
-	}
-	@keyframes example1 {
-		0% {
-			-moz-transform: translateX(0%); /* Firefox bug fix */
-			-webkit-transform: translateX(0%); /* Firefox bug fix */
-			transform: translateX(0%);
-		}
-		100% {
-			-moz-transform: translateX(-100%); /* Firefox bug fix */
-			-webkit-transform: translateX(-100%); /* Firefox bug fix */
-			transform: translateX(-100%);
-		}
-	}
-
+    @media (max-width: 480px) {
+        .strip1 {
+            animation: infinite-scroll 3s linear infinite;
+        }
+    }
 </style>
